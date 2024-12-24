@@ -45,14 +45,25 @@
 <body>
     <div class="gallery">
         <div class="product">
-            <img src="https://i.imgur.com/N4XvysV_d.jpeg?maxwidth=520&shape=thumb&fidelity=high" alt="Prenda 1">
+          <div class="product-slider">
+            <div class="slide">
+            <img src="https://i.imgur.com/N4XvysV_d.jpeg?maxwidth=520&shape=thumb&fidelity=high" alt="Prenda 1-Vista Frontal">
+            </div>
+            <div class="slide">
+              <img src=" LINK " alt="Prenda 1-Vista Lateral"
+                </div>
+                <div class="slide">
+            <img src="https://i.imgur.com/N4XvysV_d.jpeg?maxwidth=520&shape=thumb&fidelity=high" alt="Prenda 1-Vista Detalle">
+       
+        </div>
+        </div>
+          <button class="prev-slide">Anterior</button>
+          <button class="next-slide">Siguiente</button>
+     </div>
             <h2>P U F F E R  -  B O N E S</h2>
             <p class="description">Chaleco de huesos puffer, realizado con retazos de mezclilla reciclada, confeccionadas para elaborar una pieza única. Próximamente publicaremos para que se realizó.
               terminado el 5 de Noviembre del 2024, con mezclilla reciclada de @levismx.</p>
             <p>Precio: ???</p>
-        </div>
-        </div>
-
 
         
         <div class="gallery">
@@ -447,7 +458,54 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 10px;
-}</style><script>const products = document.querySelectorAll('.product');
+}
+
+  .product-slider {
+    position: relative;
+    overflow: hidden; /* Oculta las imágenes que no se ven */
+    width: 100%; /* Ajusta el ancho según sea necesario */
+    margin-bottom: 20px;
+}
+
+.slide {
+    display: none; /* Oculta todas las imágenes excepto la primera */
+    width: 100%;
+    text-align: center;
+}
+.slide img{
+    max-width: 50%;
+    height: auto;
+}
+.slide.active {
+    display: block; /* Muestra la imagen activa */
+}
+
+/* Estilos para los botones de navegación (opcional) */
+.prev-slide, .next-slide {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.prev-slide {
+    left: 10px;
+}
+
+.next-slide {
+    right: 10px;
+}
+.product{
+    text-align: center;
+}
+  
+</style>
+
+<script>const products = document.querySelectorAll('.product');
 
       products.forEach(product => {
           product.addEventListener('mouseenter', () => {
@@ -457,4 +515,35 @@
           product.addEventListener('mouseleave', () => {
               product.querySelector('.description').style.display = 'none';
           });
-      });</script>
+      });
+const productSliders = document.querySelectorAll('.product-slider');
+
+productSliders.forEach(slider => {
+    const slides = slider.querySelectorAll('.slide');
+    const prevButton = slider.querySelector('.prev-slide');
+    const nextButton = slider.querySelector('.next-slide');
+    let currentSlide = 0;
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+    }
+
+    showSlide(currentSlide); // Muestra la primera imagen al cargar
+
+    if (prevButton && nextButton) { // Verifica si existen los botones
+        prevButton.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
+    }
+
+});
+</script>
+
+
