@@ -494,48 +494,14 @@
   
 </style>
 
-<script>
-  
-  "site": "iygd505",
-  const products = document.querySelectorAll('.product');
+<script>const products = document.querySelectorAll('.product');
 
-      products.forEach(product => {
-          product.addEventListener('mouseenter', () => {
-              product.querySelector('.description').style.display = 'block';
-          });
-      
-          product.addEventListener('mouseleave', () => {
-              product.querySelector('.description').style.display = 'none';
-          });
-      });
-const productSliders = document.querySelectorAll('.product-slider');
-
-productSliders.forEach(slider => {
-    const slides = slider.querySelectorAll('.slide');
-    const prevButton = slider.querySelector('.prev-slide');
-    const nextButton = slider.querySelector('.next-slide');
-    let currentSlide = 0;
-
-    function showSlide(n) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        slides[n].classList.add('active');
-    }
-
-    showSlide(currentSlide); // Muestra la primera imagen al cargar
-
-    if (prevButton && nextButton) { // Verifica si existen los botones
-        prevButton.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
+    products.forEach(product => {
+        product.addEventListener('mouseenter', () => {
+            product.querySelector('.description').style.display = 'block';
         });
-
-        nextButton.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
+    
+        product.addEventListener('mouseleave', () => {
+            product.querySelector('.description').style.display = 'none';
         });
-    }
-
-});
-</script>
-
-
+    });</script>
